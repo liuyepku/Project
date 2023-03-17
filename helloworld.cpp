@@ -12,7 +12,9 @@ int main()
     {
         cout << word << " ";
         cout<< "hi 888888888"<<endl;;
+        
     }
     cout << endl;
 }
 
+//  write quick sort

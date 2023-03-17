@@ -3,33 +3,32 @@
 #include<vector>
 
 using namespace std;
-struct MyStruct {
-   int key;
-   string data;
-   MyStruct(int key, string data) {
-      this -> key = key;
-      this -> data = data;
-   }
-};
-int main() {
-   std::vector<MyStruct> vec;
-   vec.push_back(MyStruct(4, "test"));
-   vec.push_back(MyStruct(2, "is"));
-   vec.push_back(MyStruct(3, "a"));
-   vec.push_back(MyStruct(1, "this"));
-   
-   // Using lambda expressions in C++11
-   sort(vec.begin(), vec.end(), [](const MyStruct& lhs, const MyStruct& rhs) {
-      return lhs.key < rhs.key;
-   });
-   for(auto it = vec.begin(); it != vec.end(); it++) {
-      cout << it -> data << endl;
+
+// write a quick sort algorithm in C++ using lambda expressions
+void quickSort(vector<int> &arr, int left, int right) {
+   if(left < right) {
+      int pivot = partition(arr, left, right);
+      quickSort(arr, left, pivot - 1);
+      quickSort(arr, pivot + 1, right);
    }
 }
-
-// quick sort of a vector
-
-
-int CalculateDaysBetweenDates(){
-
+int partition(vector<int> &arr, int left, int right) {
+   int pivot = arr[right];
+   int i = left - 1;
+   for(int j = left; j < right; j++) {
+      if(arr[j] <= pivot) {
+         i++;
+         swap(arr[i], arr[j]);
+      }
+   }
+   swap(arr[i + 1], arr[right]);
+   return i + 1;
+}
+// test this function
+int main() {
+   vector<int> arr = {5, 4, 3, 2, 1};
+   quickSort(arr, 0, arr.size() - 1);
+   for(int i = 0; i < arr.size(); i++) {
+      cout << arr[i] << endl;
+   }
 }
